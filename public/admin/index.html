@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Admin — Car Shine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="login" id="loginView" hidden>
+    <form class="login-box" id="loginForm">
+      <div class="logo-dot"></div>
+      <h1>Admin login</h1>
+      <p class="muted">Car Shine Service Station</p>
+      <input id="lUser" placeholder="Username" autocomplete="username" required />
+      <input id="lPass" type="password" placeholder="Password" autocomplete="current-password" required />
+      <p class="err" id="lErr" hidden></p>
+      <button class="btn primary block">Log in</button>
+    </form>
+  </div>
+
+  <!-- APP -->
+  <div class="app" id="appView" hidden>
+    <aside class="side" id="side">
+      <div class="side-brand"><span class="logo-dot sm"></span><span>Car Shine <small>Admin</small></span></div>
+      <nav>
+        <a data-view="dashboard" class="on">📊 <span>Dashboard</span></a>
+        <a data-view="appointments">📅 <span>Appointments</span><b class="pill" id="pendingPill" hidden></b></a>
+        <a data-view="services">🧽 <span>Services &amp; prices</span></a>
+        <a data-view="offers">🏷️ <span>Offers</span></a>
+        <a data-view="gallery">🖼️ <span>Gallery</span></a>
+        <a data-view="settings">⚙️ <span>Website settings</span></a>
+      </nav>
+      <div class="side-foot">
+        <a href="/" target="_blank" class="btn ghost block">View website ↗</a>
+        <button class="btn ghost block" id="logoutBtn">Log out</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <button class="burger" id="burger" aria-label="Menu">☰</button>
+        <h2 id="viewTitle">Dashboard</h2>
+        <div class="top-actions" id="topActions"></div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="view" id="v-dashboard">
+        <div class="stats" id="stats"></div>
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-h"><h3>Today's schedule</h3><a class="link" data-goto="appointments">See all →</a></div>
+            <div id="todayList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><h3>Popular services (30 days)</h3></div>
+            <div id="topServices"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- APPOINTMENTS -->
+      <section class="view" id="v-appointments" hidden>
+        <div class="filters">
+          <div class="seg" id="rangeSeg">
+            <button data-range="today" class="on">Today</button>
+            <button data-range="tomorrow">Tomorrow</button>
+            <button data-range="upcoming">Upcoming</button>
+            <button data-range="past">Past</button>
+            <button data-range="all">All</button>
+          </div>
+          <input type="date" id="fDate" title="Pick a specific date" />
+          <select id="fStatus">
+            <option value="all">All statuses</option><option value="pending">Pending</option><option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option><option value="cancelled">Cancelled</option>
+          </select>
+          <input id="fSearch" placeholder="Search name, phone, plate, ref…" />
+        </div>
+        <div class="panel np"><div id="apptList"></div></div>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="view" id="v-services" hidden>
+        <p class="muted">These appear on the website with prices. The duration controls how long a booking holds a bay. Untick "Show on website" to hide a service without deleting it.</p>
+        <div class="cards" id="serviceList"></div>
+      </section>
+
+      <!-- OFFERS -->
+      <section class="view" id="v-offers" hidden>
+        <p class="muted">Offers show in a highlighted section near the top of the website. Expired offers hide automatically.</p>
+        <div class="cards" id="offerList"></div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="view" id="v-gallery" hidden>
+        <label class="drop" id="drop">
+          <input type="file" id="galFiles" accept="image/*" multiple hidden />
+          <strong>Click or drop photos here</strong><span class="muted">JPG, PNG or WEBP · up to 20 at once · max 8MB each</span>
+        </label>
+        <div class="gal" id="galList"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view" id="v-settings" hidden>
+        <form id="settingsForm" class="settings">
+          <div class="panel">
+            <h3>Business details</h3>
+            <div class="row2">
+              <label>Business name<input name="business_name" /></label>
+              <label>Tagline<input name="tagline" /></label>
+              <label>Phone (shown on site)<input name="phone" placeholder="0300 1234567" /></label>
+              <label>WhatsApp number<input name="whatsapp" placeholder="923001234567 (country code, no +)" /></label>
+              <label>Email<input name="email" type="email" /></label>
+              <label>Currency label<input name="currency" placeholder="Rs" /></label>
+            </div>
+            <label>Address<input name="address" /></label>
+            <div class="row2">
+              <label>Map latitude<input name="map_lat" /></label>
+              <label>Map longitude<input name="map_lng" /></label>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Homepage text</h3>
+            <label>Top banner announcement <span class="muted">(leave blank to hide)</span><input name="announcement" placeholder="e.g. Eid special: 20% off all detailing!" /></label>
+            <label>Big headline<input name="hero_title" /></label>
+            <label>Headline sub-text<textarea name="hero_subtitle" rows="2"></textarea></label>
+            <label>About title<input name="about_title" /></label>
+            <label>About text<textarea name="about_text" rows="3"></textarea></label>
+          </div>
+
+          <div class="panel">
+            <h3>Look &amp; images</h3>
+            <div class="row2">
+              <div class="imgset" data-key="hero_image"><span class="lbl">Homepage background photo</span><div class="thumb wide"></div>
+                <div class="imgbtns"><label class="btn sm">Upload<input type="file" accept="image/*" hidden /></label><button type="button" class="btn sm ghost-d" data-remove>Remove</button></div></div>
+              <div class="imgset" data-key="logo"><span class="lbl">Logo (square)</span><div class="thumb sq"></div>
+                <div class="imgbtns"><label class="btn sm">Upload<input type="file" accept="image/*" hidden /></label><button type="button" class="btn sm ghost-d" data-remove>Remove</button></div></div>
+            </div>
+            <div class="row2">
+              <label>Main colour<span class="color"><input type="color" name="primary_color" /><code></code></span></label>
+              <label>Highlight colour<span class="color"><input type="color" name="accent_color" /><code></code></span></label>
+            </div>
+            <div class="row3">
+              <label>Facebook URL<input name="facebook" /></label>
+              <label>Instagram URL<input name="instagram" /></label>
+              <label>TikTok URL<input name="tiktok" /></label>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Opening hours &amp; booking</h3>
+            <table class="hours-ed" id="hoursEd"></table>
+            <div class="row3">
+              <label>Time between slots (min)<input name="slot_minutes" type="number" min="10" step="5" /></label>
+              <label>Cars at the same time (bays)<input name="bays" type="number" min="1" /></label>
+              <label>Days ahead customers can book<input name="booking_days_ahead" type="number" min="1" max="90" /></label>
+            </div>
+            <label>Closed dates / holidays <span class="muted">(comma separated, YYYY-MM-DD)</span><input name="closed_dates" placeholder="2026-12-25, 2027-03-20" /></label>
+            <label class="check"><input type="checkbox" name="booking_enabled" /> Accept online bookings</label>
+          </div>
+
+          <div class="savebar"><button class="btn primary">Save settings</button></div>
+        </form>
+
+        <form id="accountForm" class="panel">
+          <h3>Admin account</h3>
+          <div class="row3">
+            <label>New username <span class="muted">(optional)</span><input name="new_username" autocomplete="username" /></label>
+            <label>New password <span class="muted">(min 8)</span><input name="new_password" type="password" autocomplete="new-password" /></label>
+            <label>Current password<input name="current_password" type="password" required autocomplete="current-password" /></label>
+          </div>
+          <button class="btn primary">Update account</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- generic modal -->
+  <div class="modal" id="modal" hidden><div class="modal-box"><button class="x" data-close>×</button><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

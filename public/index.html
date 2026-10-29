@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Car Shine Service Station — Car Wash & Detailing, Peshawar</title>
+  <meta name="description" content="Car wash, detailing and oil change at Motorway Junction, Northern Bypass, Peshawar. Book your slot online." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+  <div id="announce" class="announce" hidden></div>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a href="#top" class="brand"><span class="brand-mark" id="brandMark"></span><span id="brandName">Car Shine</span></a>
+      <nav class="links" id="links">
+        <a href="#services">Services</a>
+        <a href="#offers" id="navOffers">Offers</a>
+        <a href="#gallery" id="navGallery">Gallery</a>
+        <a href="#visit">Visit</a>
+        <button class="link-btn" data-open="manage">My booking</button>
+      </nav>
+      <a href="#book" class="btn btn-accent nav-cta">Book now</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="wrap hero-in">
+        <p class="eyebrow" id="tagline">Wash • Detailing • Oil Change</p>
+        <h1 id="heroTitle">Your car deserves to shine.</h1>
+        <p class="lead" id="heroSub"></p>
+        <div class="hero-actions">
+          <a href="#book" class="btn btn-accent btn-lg">Book a slot</a>
+          <a href="#" class="btn btn-ghost btn-lg" id="heroCall" hidden>Call us</a>
+        </div>
+        <ul class="hero-facts">
+          <li><strong id="todayHours">—</strong><span>Today</span></li>
+          <li><strong>5.0 ★</strong><span>Google rating</span></li>
+          <li><strong>Motorway Jn.</strong><span>Northern Bypass</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- OFFERS -->
+    <section class="section offers-sec" id="offers" hidden>
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Limited time</p>
+          <h2>Current offers</h2>
+        </div>
+        <div class="offers" id="offersList"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">What we do</p>
+          <h2>Services &amp; prices</h2>
+        </div>
+        <div class="services" id="servicesList"></div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="section book-sec" id="book">
+      <div class="wrap book-grid">
+        <div class="book-intro">
+          <p class="eyebrow">Skip the queue</p>
+          <h2>Book your slot</h2>
+          <p>Pick a service, choose a time that suits you, and we'll have a bay ready when you arrive. You'll get a booking reference you can use to check or cancel.</p>
+          <ol class="steps-mini">
+            <li>Choose service</li><li>Pick date &amp; time</li><li>Your details</li>
+          </ol>
+          <p class="muted small" id="bookPaused" hidden>Online booking is paused right now — please call or WhatsApp us.</p>
+        </div>
+
+        <form class="card book-card" id="bookForm" novalidate>
+          <div class="field">
+            <label>1. Service</label>
+            <select id="bService" required></select>
+            <p class="hint" id="bServiceInfo"></p>
+          </div>
+
+          <div class="field">
+            <label>2. Date</label>
+            <div class="dates" id="bDates"></div>
+          </div>
+
+          <div class="field">
+            <label>Time</label>
+            <div class="times" id="bTimes"><p class="hint">Choose a date to see free times.</p></div>
+          </div>
+
+          <div class="field-row">
+            <div class="field"><label for="bName">3. Your name</label><input id="bName" autocomplete="name" required maxlength="80" /></div>
+            <div class="field"><label for="bPhone">Phone / WhatsApp</label><input id="bPhone" type="tel" autocomplete="tel" placeholder="03xx xxxxxxx" required /></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="bCar">Car (make &amp; model)</label><input id="bCar" placeholder="e.g. Toyota Corolla" maxlength="80" /></div>
+            <div class="field"><label for="bPlate">Number plate</label><input id="bPlate" placeholder="e.g. PR-1234" maxlength="20" /></div>
+          </div>
+          <div class="field"><label for="bNotes">Notes (optional)</label><textarea id="bNotes" rows="2" maxlength="500"></textarea></div>
+
+          <div class="summary" id="bSummary" hidden></div>
+          <p class="error" id="bError" hidden></p>
+          <button class="btn btn-primary btn-block btn-lg" id="bSubmit" type="submit">Confirm booking</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section" id="gallery" hidden>
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Our work</p>
+          <h2>Gallery</h2>
+        </div>
+        <div class="gallery" id="galleryList"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT / VISIT -->
+    <section class="section visit-sec" id="visit">
+      <div class="wrap visit-grid">
+        <div>
+          <p class="eyebrow">Visit us</p>
+          <h2 id="aboutTitle">Why drivers choose Car Shine</h2>
+          <p id="aboutText"></p>
+          <div class="contact-list" id="contactList"></div>
+          <h3 class="hours-h">Opening hours</h3>
+          <table class="hours" id="hoursTable"></table>
+        </div>
+        <div class="map card"><iframe id="map" title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <a class="btn btn-primary btn-block" id="directions" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot-in">
+      <div><strong id="footName">Car Shine Service Station</strong><p class="muted small" id="footAddr"></p></div>
+      <div class="socials" id="socials"></div>
+      <p class="muted small">© <span id="year"></span> <span id="footName2"></span></p>
+    </div>
+  </footer>
+
+  <a class="wa-float" id="waFloat" target="_blank" rel="noopener" hidden aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 2 6.8L3 29l6.8-2.2c1.9 1.1 4 1.6 6.2 1.6 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23c-2 0-3.9-.6-5.6-1.6l-.4-.2-4 1.3 1.3-3.9-.3-.4c-1.1-1.7-1.7-3.6-1.7-5.6C5.3 9.8 10.1 5 16 5s10.7 4.8 10.7 10.6S21.9 26 16 26zm5.9-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+  </a>
+
+  <!-- Booking success modal -->
+  <div class="modal" id="successModal" hidden>
+    <div class="modal-box">
+      <div class="tick">✓</div>
+      <h3>Booking received!</h3>
+      <p>Your reference is</p>
+      <p class="ref" id="sRef"></p>
+      <p class="muted" id="sDetails"></p>
+      <p class="small muted">Please save this reference. We'll confirm on your phone shortly.</p>
+      <div class="modal-actions">
+        <a class="btn btn-wa" id="sWa" target="_blank" rel="noopener" hidden>Send on WhatsApp</a>
+        <button class="btn btn-ghost-dark" data-close>Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manage booking modal -->
+  <div class="modal" id="manageModal" hidden>
+    <div class="modal-box">
+      <button class="x" data-close aria-label="Close">×</button>
+      <h3>Check or cancel a booking</h3>
+      <form id="manageForm" class="stack">
+        <input id="mRef" placeholder="Reference e.g. CS-ABC23" required />
+        <input id="mPhone" type="tel" placeholder="Phone used for booking" required />
+        <button class="btn btn-primary btn-block">Find booking</button>
+      </form>
+      <div id="manageResult"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" hidden><img id="lbImg" alt="" /><p id="lbCap"></p></div>
+
+  <script src="/js/site.js"></script>
+</body>
+</html>
